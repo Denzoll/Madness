@@ -1,7 +1,11 @@
 import React from "react";
 
-const PizzaBlock = ({ title, price }) => {
+const PizzaBlock = ({ title, price, sizes, types }) => {
   const [PizzaCount, setPizzaCount] = React.useState(0);
+  const pizzaTypes = ["тонкое", "традиционное"];
+  const [active, setActive] = React.useState(0);
+  const [sizeActive, setSizeActive] = React.useState(0); 
+
   return (
     <div className="pizza-block">
       <img
@@ -13,13 +17,32 @@ const PizzaBlock = ({ title, price }) => {
       <h4 className="pizza-block__title">{title}</h4>
       <div className="pizza-block__selector">
         <ul>
-          <li className="active">тонкое</li>
-          <li>традиционное</li>
+          {types.map((item, i) => {
+            return (
+              <li
+                onClick={() => {
+                  setActive(i);
+                }}
+                className={active === i ? "active" : ""}
+              >
+                {pizzaTypes[item]}
+              </li>
+            );
+          })}
         </ul>
         <ul>
-          <li className="active">26 см.</li>
-          <li>30 см.</li>
-          <li>40 см.</li>
+          {sizes.map((value, i) => {
+            return (
+              <li
+                onClick={() => {
+                  setSizeActive(i);
+                }}
+                className={sizeActive === i ? "active" : ""}
+              >
+                {value} см
+              </li>
+            );
+          })}
         </ul>
       </div>
       <div
