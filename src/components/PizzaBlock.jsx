@@ -1,6 +1,6 @@
 import React from "react";
 
-const PizzaBlock = ({ title, price, sizes, types }) => {
+const PizzaBlock = ({ title, price, sizes, types,id }) => {
   const [PizzaCount, setPizzaCount] = React.useState(0);
   const pizzaTypes = ["тонкое", "традиционное"];
   const [active, setActive] = React.useState(0);
@@ -19,11 +19,12 @@ const PizzaBlock = ({ title, price, sizes, types }) => {
         <ul>
           {types.map((item, i) => {
             return (
-              <li
+              <li key={i}
                 onClick={() => {
                   setActive(i);
                 }}
                 className={active === i ? "active" : ""}
+                
               >
                 {pizzaTypes[item]}
               </li>
@@ -33,7 +34,7 @@ const PizzaBlock = ({ title, price, sizes, types }) => {
         <ul>
           {sizes.map((value, i) => {
             return (
-              <li
+              <li key={i}
                 onClick={() => {
                   setSizeActive(i);
                 }}
