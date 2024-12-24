@@ -15,6 +15,7 @@ const Home = () => {
     const data = await responce.json();
     setItems(data);
     setIsLoadind(false);
+    window.scrollTo(0,0)
   };
 
   useEffect(() => {
