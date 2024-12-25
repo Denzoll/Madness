@@ -1,11 +1,11 @@
 import React from "react";
 
-const Sort = () => {
+const Sort = ({sortValue,onClickSort}) => {
   const sortList = ["популярности", "цене", "алфавиту"];
   const [activeSort, setActiveSort] = React.useState(false);
   const [activeSortList, setActiveSortList] = React.useState(0);
   const  selectedSort = (i) => {
-    setActiveSortList(i)
+    onClickSort(i)
     setActiveSort(!activeSort) 
   }
   return (
@@ -29,7 +29,7 @@ const Sort = () => {
             setActiveSort(!activeSort);
           }}
         >
-          {sortList[activeSortList]}
+          {sortList[sortValue]}
         </span>
       </div>
 
@@ -41,7 +41,7 @@ const Sort = () => {
                 <li
                 key={i}
                   onClick={() => selectedSort(i)}
-                  className={activeSortList === i ? "active" : ""}
+                  className={sortValue === i ? "active" : ""}
                 >
                   {name}
                 </li>

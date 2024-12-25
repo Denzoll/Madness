@@ -8,9 +8,12 @@ import Skeleton from "../components/Skeleton";
 const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoadind] = React.useState(true);
+  const [categoryId, setCategoryId] = React.useState(0);
+  const [sortType, setSortType] = React.useState(0)
   const fetchData = async () => {
+    setIsLoadind(true);
     const responce = await fetch(
-      "https://67652c3552b2a7619f5ea196.mockapi.io/items"
+      "https://67652c3552b2a7619f5ea196.mockapi.io/items?category=" + categoryId
     );
     const data = await responce.json();
     setItems(data);
@@ -20,13 +23,13 @@ const Home = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [categoryId,sortType]);
   return (
     <>
       <div className="container">
         <div className="content__top">
-          <Categories />
-          <Sort />
+          <Categories value={categoryId} onClickCategory={(i) => setCategoryId(i)}/>
+          <Sort sortValue={sortType} onClickSort={(i) => setSortType(i)} />
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
