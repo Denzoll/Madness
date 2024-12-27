@@ -1,13 +1,16 @@
 import React from "react";
 
-const Sort = ({sortValue,onClickSort}) => {
-  const sortList = ["популярности", "цене", "алфавиту"];
+const Sort = ({ sortValue, onClickSort }) => {
+  const sortList = [
+    { name: "популярности", sortProperty: "raing" },
+    { name: "цене", sortProperty: "price" },
+    { name: "алфавиту", sortProperty: "title" },
+  ];
   const [activeSort, setActiveSort] = React.useState(false);
-  const [activeSortList, setActiveSortList] = React.useState(0);
-  const  selectedSort = (i) => {
-    onClickSort(i)
-    setActiveSort(!activeSort) 
-  }
+  const selectedSort = (i) => {
+    onClickSort(i);
+    setActiveSort(!activeSort);
+  };
   return (
     <div className="sort">
       <div className="sort__label">
@@ -29,7 +32,7 @@ const Sort = ({sortValue,onClickSort}) => {
             setActiveSort(!activeSort);
           }}
         >
-          {sortList[sortValue]}
+          {sortValue.name} 
         </span>
       </div>
 
@@ -39,11 +42,11 @@ const Sort = ({sortValue,onClickSort}) => {
             {sortList.map((name, i) => {
               return (
                 <li
-                key={i}
+                  key={i}
                   onClick={() => selectedSort(i)}
-                  className={sortValue === i ? "active" : ""}
+                  className={sortValue.sortProperty === name.sortProperty ? "active" : ""}
                 >
-                  {name}
+                  {name.name}
                 </li>
               );
             })}
